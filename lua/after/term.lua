@@ -10,7 +10,9 @@ local function toggle_window_left_right()
 	vim.cmd('wincmd l')
 end
 
-vim.keymap.set('n', '<Esc><Esc>', toggle_window_left_right, { silent = true })
-vim.keymap.set('t', '<Esc><Esc>', toggle_window_left_right, { silent = true })
+-- vim.keymap.set('n', '<C-j>', toggle_window_left_right, { silent = true })
+-- vim.keymap.set('t', '<C-j>', toggle_window_left_right, { silent = true })
+vim.keymap.set('n', '<C-j>', function() vim.cmd('wincmd h') end, { silent = true })
+vim.keymap.set('n', '<C-k>', function() vim.cmd('wincmd l') end, { silent = true })
 vim.keymap.set('n', '<Space>q', ':q<CR>', { silent = true })
 
