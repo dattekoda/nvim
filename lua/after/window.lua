@@ -1,4 +1,5 @@
 vim.keymap.set('n', '<Space>t', ':vsplit | wincmd l | terminal<CR>', { silent = true })
+vim.keymap.set('n', '<Space>n', ':vsplit | wincmd l<CR>', { silent = true })
 
 local function toggle_window_left_right()
 	local current_win = vim.fn.winnr()
