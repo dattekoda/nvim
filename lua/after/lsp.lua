@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local opts = { buffer = ev.buf, noremap = true, silent = true }
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts ) -- 定義へジャンプ
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts) -- 変数名の一括変更
+    vim.keymap.set('n', '<leader>daw', vim.lsp.buf.rename, opts) -- 変数名の一括変更
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts) -- コードアクション
   end,
 })
