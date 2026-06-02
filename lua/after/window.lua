@@ -2,7 +2,7 @@ vim.keymap.set('n', '<Space>t', ':vsplit | wincmd l | terminal<CR>', { silent = 
 vim.keymap.set('n', '<Space>n', ':vsplit | wincmd l<CR>', { silent = true })
 
 vim.keymap.set({'n','i','t'}, '<C-t>', '<Cmd>vsplit | wincmd l | terminal<CR>', { silent = true })
-vim.keymap.set({'n','i','t'}, '<C-;>', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
+vim.keymap.set({'n','i','t'}, '<C-v>', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
 
 local function toggle_window_left_right()
 	local current_win = vim.fn.winnr()
