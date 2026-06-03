@@ -5,20 +5,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local opts = { buffer = ev.buf, noremap = true, silent = true }
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts ) -- 定義へジャンプ
-    vim.keymap.set('n', '<leader>daw', vim.lsp.buf.rename, opts) -- 変数名の一括変更
+    vim.keymap.set('n', 'rn', vim.lsp.buf.rename, opts) -- 変数名の一括変更
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts) -- コードアクション
+    vim.keymap.set('n', 'vd', function()
+	    vim.cmd('vsplit | wincmd l')
+	    vim.lsp.buf.definition()
+    end, opts)
   end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'c', 'cpp' },
-	callback = function()
-		vim.lsp.start({
-			name = 'clangd',
-			cmd = { 'clangd' },
-			root_dir = vim.fs.root(0, { '.git', 'Makefile' }) or vim.fn.getcwd(),
-		})
-	end,
 })
 
 local cmp_status, cmp = pcall(require, "cmp")
