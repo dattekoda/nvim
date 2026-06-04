@@ -1,3 +1,20 @@
+vim.opt.updatetime = 100
+
+vim.diagnostic.config({
+	update_in_insert = false,
+	virtual_text = true,
+	signs = true,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = vim.api.nvim_create_augroup("AutoShowDiagnostic", { clear = true }),
+	callback = function()
+		vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+	end,
+})
+
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 
 --p lspがバッファにアタッチされたときのみキーバインドを有効化する
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -48,19 +65,21 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = { 'c', 'cpp' },
-	callback = function()
-        -- nvim-cmpが提供する機能をLSP用の設定に変換
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-        if has_cmp then
-            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-        end
+	callback = function(ev)
+		-- nvim-cmpが提供する機能をLSP用の設定に変換
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+		if has_cmp then
+		    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+		end
+
+		local cmd = { 'clangd', '--background-index' }
 
 		vim.lsp.start({
 			name = 'clangd',
-			cmd = { 'clangd' },
+			cmd = cmd,
 			root_dir = vim.fs.root(0, { '.git', 'Makefile' }) or vim.fn.getcwd(),
-            capabilities = capabilities, -- clangdに補完機能があることを伝える
+			capabilities = capabilities, -- clangdに補完機能があることを伝える
 		})
 	end,
 })
