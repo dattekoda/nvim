@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 require("dattekoda.lazy")
 
 require("after.clipboard")

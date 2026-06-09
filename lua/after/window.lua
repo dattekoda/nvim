@@ -1,4 +1,3 @@
-vim.keymap.set('n', '<Space>t', '<Cmd>vsplit | wincmd l | terminal<CR>', { silent = true })
 vim.keymap.set('n', '<Space>n', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
 vim.keymap.set('n', '<Space>q', '<Cmd>q<CR>', { silent = true })
 
