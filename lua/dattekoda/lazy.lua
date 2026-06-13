@@ -76,5 +76,20 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '開いているバッファの検索' })
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Neovimのヘルプ検索' })
     end
-  }
+  },
+{
+  "Diogo-ss/42-header.nvim",
+  cmd = { "Stdheader" },
+  keys = { "<F1>" },
+  opts = {
+    default_map = true, -- Default mapping <F1> in normal mode.
+    auto_update = true, -- Update header when saving.
+    user = "khanadat", -- Your user.
+    mail = "khanadat@student.42tokyo.jp", -- Your mail.
+    -- add other options.
+  },
+  config = function(_, opts)
+    require("42header").setup(opts)
+  end,
+}
 })

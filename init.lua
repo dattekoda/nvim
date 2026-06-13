@@ -7,6 +7,7 @@ require("after.telescope");
 require("after.keymap")
 require("after.root")
 require("after.lsp")
+require("after.header");
 
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
