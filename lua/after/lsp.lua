@@ -23,14 +23,17 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous diagnosti
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('userlspconfig', {}),
 	callback = function(ev)
-		local opts = { buffer = ev.buf, noremap = true, silent = true }
-		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts ) -- 定義へジャンプ
+		local opts = { buffer = ev.buf, silent = true }
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts) -- 定義へジャンプ
 		vim.keymap.set('n', 'rn', vim.lsp.buf.rename, opts) -- 変数名の一括変更
-		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts) -- コードアクション
 		vim.keymap.set('n', 'gn', function()
 			vim.cmd('vsplit | wincmd l')
 			vim.lsp.buf.definition()
 		end, opts)
+		vim.keymap.set("n", "<leader>f", function()
+			vim.lsp.buf.format({ async = true })
+		end, opts)
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts) -- clang-tidy
 	end,
 })
 
@@ -81,8 +84,4 @@ vim.api.nvim_create_autocmd('FileType', {
 		})
 	end,
 })
-
-vim.keymap.set("n", "<leader>f", function()
-	vim.lsp.buf.format({ async = true })
-end, { desc = "Format via LSP" })
 
