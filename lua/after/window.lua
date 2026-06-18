@@ -7,21 +7,9 @@ vim.keymap.set({'n','i','t'}, '<C-t>', function()
 end, { silent = true })
 vim.keymap.set({'n','i','t'}, '<C-v>', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
 
-local function toggle_window_left_right()
-	local current_win = vim.fn.winnr()
-
-	vim.cmd('wincmd h')
-	if vim.fn.winnr() ~= current_win then
-		return
-	end
-	vim.cmd('wincmd l')
-end
-
-vim.keymap.set({'n','t'}, '<C-j>', toggle_window_left_right, { silent = true })
-vim.keymap.set('i', '<C-j>', function()
-	vim.cmd('stopinsert')
-	toggle_window_left_right()
-end, { silent = true })
+vim.keymap.set({'n'}, '<C-j>', '<C-w>w', { noremap = true, silent = true })
+vim.keymap.set({'i'}, '<C-j>', '<Esc><C-w>w', { noremap = true, silent = true })
+vim.keymap.set({'t'}, '<C-j>', '<C-\\><C-n><C-w>w', { noremap = true, silent = true })
 
 local function close_adjacent_window()
 	toggle_window_left_right()
@@ -32,16 +20,16 @@ vim.keymap.set({'n','i','t'}, '<C-k>', close_adjacent_window, { silent = true })
 
 local function resize_left()
 	if vim.fn.winnr('l') ~= vim.fn.winnr() then
-		vim.cmd('vertical resize -2')
+		vim.cmd('vertical resize -10')
 	else
-		vim.cmd('vertical resize +2')
+		vim.cmd('vertical resize +10')
 	end
 end
 local function resize_right()
 	if vim.fn.winnr('l') ~= vim.fn.winnr() then
-		vim.cmd('vertical resize +2')
+		vim.cmd('vertical resize +10')
 	else
-		vim.cmd('vertical resize -2')
+		vim.cmd('vertical resize -10')
 	end
 end
 vim.api.nvim_create_autocmd('FileType', {
