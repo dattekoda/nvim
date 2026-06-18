@@ -91,5 +91,13 @@ require("lazy").setup({
   config = function(_, opts)
     require("42header").setup(opts)
   end,
+},
+{
+	"kylechui/nvim-surround",
+	version = "*",
+	event = "VeryLazy",
+	config = function()
+		require("nvim-surround").setup({})
+	end
 }
 })
