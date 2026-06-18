@@ -51,5 +51,5 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.keymap.set('n', '<C-h>', resize_left, { buffer = true, silent = true })
 	end
 })
-vim.keymap.set('n', '<C-l>', resize_right, { buffer = true, silent = true })
-vim.keymap.set('n', '<C-h>', resize_left, { buffer = true, silent = true })
+vim.keymap.set('n', '<C-l>', resize_right, { silent = true })
+vim.keymap.set('n', '<C-h>', resize_left, { silent = true })
