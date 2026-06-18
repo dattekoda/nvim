@@ -5,18 +5,17 @@ vim.keymap.set({'n','i','t'}, '<C-t>', function()
 	vim.cmd('vsplit | wincmd l | terminal')
 	vim.cmd('startinsert')
 end, { silent = true })
-vim.keymap.set({'n','i','t'}, '<C-v>', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
+vim.keymap.set({'n','i','t'}, '<C-s>', '<Cmd>vsplit | wincmd l<CR>', { silent = true })
 
-vim.keymap.set({'n'}, '<C-j>', '<C-w>w', { noremap = true, silent = true })
-vim.keymap.set({'i'}, '<C-j>', '<Esc><C-w>w', { noremap = true, silent = true })
-vim.keymap.set({'t'}, '<C-j>', '<C-\\><C-n><C-w>w', { noremap = true, silent = true })
+vim.keymap.set({'n'}, '<C-k>', '<C-w>w', { noremap = true, silent = true })
+vim.keymap.set({'i'}, '<C-k>', '<Esc><C-w>w', { noremap = true, silent = true })
+vim.keymap.set({'t'}, '<C-k>', '<C-\\><C-n><C-w>w', { noremap = true, silent = true })
 
-local function close_adjacent_window()
-	toggle_window_left_right()
-	vim.cmd('q')
-end
+vim.keymap.set({'n'}, '<C-j>', '<C-w>W', { noremap = true, silent = true })
+vim.keymap.set({'i'}, '<C-j>', '<Esc><C-w>W', { noremap = true, silent = true })
+vim.keymap.set({'t'}, '<C-j>', '<C-\\><C-n><C-w>W', { noremap = true, silent = true })
 
-vim.keymap.set({'n','i','t'}, '<C-k>', close_adjacent_window, { silent = true })
+vim.keymap.set({'n','i','t'}, '<C-g>', '<Cmd>vsplit|wincmd l|Explore<CR>', { silent = true })
 
 local function resize_left()
 	if vim.fn.winnr('l') ~= vim.fn.winnr() then
