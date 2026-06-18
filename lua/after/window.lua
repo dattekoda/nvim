@@ -30,3 +30,26 @@ end
 
 vim.keymap.set({'n','i','t'}, '<C-k>', close_adjacent_window, { silent = true })
 
+local function resize_left()
+	if vim.fn.winnr('l') ~= vim.fn.winnr() then
+		vim.cmd('vertical resize -2')
+	else
+		vim.cmd('vertical resize +2')
+	end
+end
+local function resize_right()
+	if vim.fn.winnr('l') ~= vim.fn.winnr() then
+		vim.cmd('vertical resize +2')
+	else
+		vim.cmd('vertical resize -2')
+	end
+end
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'netrw',
+	callback = function()
+		vim.keymap.set('n', '<C-l>', resize_right, { buffer = true, silent = true })
+		vim.keymap.set('n', '<C-h>', resize_left, { buffer = true, silent = true })
+	end
+})
+vim.keymap.set('n', '<C-l>', resize_right, { buffer = true, silent = true })
+vim.keymap.set('n', '<C-h>', resize_left, { buffer = true, silent = true })
