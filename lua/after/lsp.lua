@@ -81,3 +81,8 @@ vim.api.nvim_create_autocmd('FileType', {
 		})
 	end,
 })
+
+vim.keymap.set("n", "<leader>f", function()
+	vim.lsp.buf.format({ async = true })
+end, { desc = "Format via LSP" })
+
