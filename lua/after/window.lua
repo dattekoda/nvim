@@ -40,3 +40,12 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 vim.keymap.set('n', '<C-l>', resize_right, { silent = true })
 vim.keymap.set('n', '<C-h>', resize_left, { silent = true })
+
+vim.api.nvim_create_autocmd("VimResized", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "terminal" then
+			vim.cmd("wincmd =")
+		end
+	end,
+})
