@@ -9,6 +9,8 @@ require("after.root")
 require("after.lsp")
 require("after.header");
 
+vim.opt.list = true
+vim.opt.listchars = { tab = '< |', trail = '.' }
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
 
