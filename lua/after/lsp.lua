@@ -1,5 +1,3 @@
--- リーダーキーをSpaceに設定（すでに別の場所で設定済みの場合は不要です）
-
 vim.opt.updatetime = 100
 
 vim.diagnostic.config({
@@ -80,6 +78,25 @@ vim.api.nvim_create_autocmd('FileType', {
 			name = 'clangd',
 			cmd = cmd,
 			root_dir = vim.fs.root(0, { '.git', 'Makefile', 'compile_commands.json' }) or vim.fn.getcwd(),
+			capabilities = capabilities,
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'haskell', 'lhaskell', 'cabal' },
+	callback = function(ev)
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+		if has_cmp then
+			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+		end
+		local cmd = { 'haskell-language-server-wrapper', '--lsp' }
+
+		vim.lsp.start({
+			name = 'hls',
+			cmd = cmd,
+			root_dir = vim.fs.root(0, { 'hie.yaml', 'cabal.project', 'package.yaml', '.git' }) or vim.fn.getcwd(),
 			capabilities = capabilities,
 		})
 	end,
