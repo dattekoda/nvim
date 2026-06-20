@@ -13,4 +13,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '< |', trail = '.' }
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
 
