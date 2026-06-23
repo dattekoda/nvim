@@ -8,6 +8,7 @@ require("after.keymap")
 require("after.root")
 require("after.lsp")
 require("after.header");
+require("after.tab");
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '< |', trail = '.' }
